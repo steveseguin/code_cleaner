@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Comment Remover</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  textarea {
+    width: 100%;
+    height: 200px;
+  }
+  button {
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+  :root {
+    --bg-color: #FFF;
+    --text-color: #000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-color: #121212;
+      --text-color: #FFF;
+    }
+    textarea {
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border: 1px solid #555;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Code Comment and Blank Line Remover</h1>
+  <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+  <button onclick="removeComments()">Clean Code Now</button>
+  <h2>Cleaned Code:</h2>
+  <textarea id="cleanedCode" readonly></textarea>
+</div>
+<script>
+function adjustTextareaHeight(textarea) {
+  textarea.style.height = 'auto';
+  textarea.style.height = (textarea.scrollHeight + 5) + 'px';
+}
+function removeComments() {
+  const codeInput = document.getElementById('codeInput').value;
+  let cleanedCode = codeInput
+    .replace(/(?:^|[^\\])(["'`])(?:(?=(\\?))\2.)*?\1|\/\/.*$/gm, (match, group1) => {
+        return group1 ? match : '';
+    })
+    .replace(/\/\*[\s\S]*?\*\
+    .replace(/[ \t]+$/gm, '')
+    .replace(/\n\s*\n/g, '\n')
+    .replace(/^\s*\n/gm, '');
+  document.getElementById('cleanedCode').value = cleanedCode.trim();
+  adjustTextareaHeight(document.getElementById('cleanedCode'));
+}
+</script>
+</body>
+</html>
