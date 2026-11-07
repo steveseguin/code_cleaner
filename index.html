@@ -61,7 +61,7 @@ function removeComments() {
     .replace(/(?:^|[^\\])(["'`])(?:(?=(\\?))\2.)*?\1|\/\/.*$/gm, (match, group1) => {
         return group1 ? match : '';
     })
-    .replace(/\/\*[\s\S]*?\*\
+    .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/[ \t]+$/gm, '')
     .replace(/\n\s*\n/g, '\n')
     .replace(/^\s*\n/gm, '');
@@ -71,3 +71,4 @@ function removeComments() {
 </script>
 </body>
 </html>
+
